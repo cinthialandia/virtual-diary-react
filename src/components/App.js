@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import { withTranslation } from "react-i18next";
 import Datepicker from "./Datepicker";
 
 class App extends React.Component {
@@ -19,6 +20,13 @@ class App extends React.Component {
       date: newDate,
     });
   };
+  getQuestionId = () => {
+    const date = new Date(this.state.date);
+    const dateMonth = date.getMonth() + 1;
+    const dateDay = date.getDate();
+    return `d${dateDay}-m${dateMonth}`;
+  };
+
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
   componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
@@ -28,12 +36,15 @@ class App extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div>
         <Datepicker date={this.state.date} setDate={this.setDate} />
+        <h1>{t(this.getQuestionId())}</h1>
       </div>
     );
   }
 }
 
-export default App;
+export default withTranslation()(App);
