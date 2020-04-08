@@ -4,10 +4,11 @@ import { withTranslation } from "react-i18next";
 import Datepicker from "./Datepicker";
 import SaveAnswer from "./SaveAnswer";
 import AnswersComponent from "./AnswersComponent";
+import base from "../base";
 
 class App extends React.Component {
   state = {
-    owner: {},
+    owner: undefined,
     date: undefined,
     answers: {},
   };
@@ -35,10 +36,15 @@ class App extends React.Component {
   };
 
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
-  componentDidMount() {
+  async componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
+    const userId = "asdf123";
+    const owner = await base.fetch(`${userId}/name`, { context: this });
+    console.log(owner);
+
     this.setState({
       date: todayDate,
+      owner,
     });
   }
 
@@ -46,7 +52,7 @@ class App extends React.Component {
 
   render() {
     const { t, tReady } = this.props;
-    const { date } = this.state;
+    const { date, owner } = this.state;
 
     if (!date || !tReady) {
       return <p>loading</p>;
@@ -54,7 +60,10 @@ class App extends React.Component {
 
     return (
       <div>
-        <Datepicker date={this.state.date} setDate={this.setDate} />
+        <header>
+          <h3>{owner}</h3>
+          <Datepicker date={this.state.date} setDate={this.setDate} />
+        </header>
         <h1>{t(this.getQuestionId())}</h1>
         <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
         <AnswersComponent answersSaved={this.state.answers} />
