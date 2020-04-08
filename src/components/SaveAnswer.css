@@ -1,0 +1,24 @@
+.form-answer {
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.year {
+  flex-basis: 12%;
+  text-align: right;
+  padding-right: 50px;
+}
+
+.text-and-button {
+  flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-and-button > .save-button {
+  margin-top: 15px;
+  align-self: flex-start;
+  min-width: 150px;
+}

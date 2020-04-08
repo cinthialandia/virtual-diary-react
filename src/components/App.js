@@ -1,10 +1,12 @@
 import React from "react";
 import { format } from "date-fns";
 import { withTranslation } from "react-i18next";
+import Paper from "@material-ui/core/Paper";
 import Datepicker from "./Datepicker";
 import SaveAnswer from "./SaveAnswer";
 import AnswersComponent from "./AnswersComponent";
 import base from "../base";
+import "./App.css";
 
 const FAKE_USER_ID = "asdf123";
 
@@ -77,15 +79,15 @@ class App extends React.Component {
     }
 
     return (
-      <div>
-        <header>
-          <h3>{owner}</h3>
+      <Paper elevation={10}>
+        <header className="header-container">
+          <h3 className="owner-name">{owner}</h3>
           <Datepicker date={this.state.date} setDate={this.setDate} />
         </header>
-        <h1>{t(this.getQuestionId())}</h1>
+        <h1 className="question">{t(this.getQuestionId())}</h1>
         <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
         <AnswersComponent answersSaved={this.state.answers} />
-      </div>
+      </Paper>
     );
   }
 }

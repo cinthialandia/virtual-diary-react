@@ -34,25 +34,20 @@ class Datepicker extends React.Component {
   render() {
     return (
       //estamos renderizando el daypicker
-      <section id="section-question">
-        <header className="header">
-          <h1 className="name-owner"></h1>
-          <div className="date-picker-container">
-            <Button onClick={this.handleClickPrev}>
-              <ArrowLeftIcon></ArrowLeftIcon>
-            </Button>
-            <input
-              name="datepicker"
-              type="date"
-              value={this.props.date}
-              onChange={this.handleInput}
-            />
-            <Button onClick={this.handleClickNext}>
-              <ArrowRightIcon></ArrowRightIcon>
-            </Button>
-          </div>
-        </header>
-      </section>
+      <div className="date-picker-container">
+        <Button onClick={this.handleClickPrev}>
+          <ArrowLeftIcon></ArrowLeftIcon>
+        </Button>
+        <input
+          name="datepicker"
+          type="date"
+          value={this.props.date}
+          onChange={this.handleInput}
+        />
+        <Button onClick={this.handleClickNext}>
+          <ArrowRightIcon></ArrowRightIcon>
+        </Button>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import "./SaveAnswer.css";
 
 class SaveAnswer extends React.Component {
   state = {
@@ -28,18 +29,25 @@ class SaveAnswer extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <span>{this.getYearFromDate()}</span>
-        <TextField
-          required
-          id="standard-required"
-          value={this.state.answer}
-          onChange={this.handleInput}
-          label="Answer"
-        />
-        <Button variant="contained" type="submit" color="primary">
-          SAVE
-        </Button>
+      <form class="form-answer" onSubmit={this.handleSubmit}>
+        <span className="year">{this.getYearFromDate()}</span>
+        <div className="text-and-button">
+          <TextField
+            className="text-field"
+            required
+            value={this.state.answer}
+            onChange={this.handleInput}
+            label="Answer"
+          />
+          <Button
+            className="save-button"
+            variant="contained"
+            type="submit"
+            color="primary"
+          >
+            Save
+          </Button>
+        </div>
       </form>
     );
   }
