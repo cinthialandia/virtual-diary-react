@@ -3,12 +3,12 @@ import { format } from "date-fns";
 import { withTranslation } from "react-i18next";
 import Datepicker from "./Datepicker";
 import SaveAnswer from "./SaveAnswer";
+import AnswersComponent from "./AnswersComponent";
 
 class App extends React.Component {
   state = {
     owner: {},
     date: undefined,
-    question: {},
     answers: {},
   };
 
@@ -42,6 +42,8 @@ class App extends React.Component {
     });
   }
 
+  //componentDidUpdate(prevProps, prevState) {}
+
   render() {
     const { t, tReady } = this.props;
     const { date } = this.state;
@@ -55,6 +57,7 @@ class App extends React.Component {
         <Datepicker date={this.state.date} setDate={this.setDate} />
         <h1>{t(this.getQuestionId())}</h1>
         <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
+        <AnswersComponent answersSaved={this.state.answers} />
       </div>
     );
   }
