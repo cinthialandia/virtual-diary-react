@@ -2,13 +2,14 @@ import React from "react";
 import { format } from "date-fns";
 import { withTranslation } from "react-i18next";
 import Datepicker from "./Datepicker";
+import SaveAnswer from "./SaveAnswer";
 
 class App extends React.Component {
   state = {
     owner: {},
-    date: {},
+    date: undefined,
     question: {},
-    answer: {},
+    answers: {},
   };
 
   //funcion que recibe un objecto fecha del componente daypicker y este le da el formato requerido para que se vea en le daypicker
@@ -27,6 +28,12 @@ class App extends React.Component {
     return `d${dateDay}-m${dateMonth}`;
   };
 
+  setAnswer = (year, answer) => {
+    this.setState({
+      answers: { ...this.state.answers, [year]: answer },
+    });
+  };
+
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
   componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
@@ -36,12 +43,18 @@ class App extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, tReady } = this.props;
+    const { date } = this.state;
+
+    if (!date || !tReady) {
+      return <p>loading</p>;
+    }
 
     return (
       <div>
         <Datepicker date={this.state.date} setDate={this.setDate} />
         <h1>{t(this.getQuestionId())}</h1>
+        <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
       </div>
     );
   }
