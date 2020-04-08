@@ -6,6 +6,8 @@ import SaveAnswer from "./SaveAnswer";
 import AnswersComponent from "./AnswersComponent";
 import base from "../base";
 
+const FAKE_USER_ID = "asdf123";
+
 class App extends React.Component {
   state = {
     owner: undefined,
@@ -38,9 +40,7 @@ class App extends React.Component {
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
   async componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
-    const userId = "asdf123";
-    const owner = await base.fetch(`${userId}/name`, { context: this });
-    console.log(owner);
+    const owner = await base.fetch(`${FAKE_USER_ID}/name`, { context: this });
 
     this.setState({
       date: todayDate,
@@ -48,7 +48,25 @@ class App extends React.Component {
     });
   }
 
-  //componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.date !== prevState.date) {
+      if (this.dbConnection) {
+        base.removeBinding(this.dbConnection);
+      }
+      this.dbConnection = base.syncState(
+        //le estamos diciendo que se sincronice con esta parte de la base de datos
+        `${FAKE_USER_ID}/answers/${this.getQuestionId()}`,
+        {
+          context: this,
+          state: "answers",
+        }
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.dbConnection);
+  }
 
   render() {
     const { t, tReady } = this.props;
