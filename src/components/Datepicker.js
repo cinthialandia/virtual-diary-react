@@ -4,7 +4,8 @@ import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { subDays } from "date-fns"; //libreria que resta los dias en el daypicker
 import { addDays } from "date-fns"; //libreria que suma los dias en el dayicker
-//import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import TextField from "@material-ui/core/TextField";
+import "./Datepicker.css";
 
 class Datepicker extends React.Component {
   //funcion, del event listener para enviar el valor de la fecha, cuando se cambie la misma en el input o daypicker
@@ -38,8 +39,7 @@ class Datepicker extends React.Component {
         <Button onClick={this.handleClickPrev}>
           <ArrowLeftIcon></ArrowLeftIcon>
         </Button>
-        <input
-          name="datepicker"
+        <TextField
           type="date"
           value={this.props.date}
           onChange={this.handleInput}

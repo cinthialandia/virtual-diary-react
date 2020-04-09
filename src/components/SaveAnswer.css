@@ -2,13 +2,15 @@
   display: flex;
   padding: 30px;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 }
 
 .year {
   flex-basis: 12%;
   text-align: right;
   padding-right: 50px;
+  font-size: 35px;
+  color: #e678a7;
 }
 
 .text-and-button {
@@ -21,4 +23,34 @@
   margin-top: 15px;
   align-self: flex-start;
   min-width: 150px;
+}
+
+/* This query was necessary for changing the size of the elements on mobile cellphone*/
+@media only screen and (max-width: 800px) {
+  /*welcome section media query*/
+
+  .form-answer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .year {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-and-button {
+    flex-basis: auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-and-button > .save-button {
+    margin-top: 35px;
+    min-width: 150px;
+    align-self: center;
+  }
 }

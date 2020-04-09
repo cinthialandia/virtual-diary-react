@@ -6,7 +6,7 @@ import App from "./components/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App useSuspense={false} />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

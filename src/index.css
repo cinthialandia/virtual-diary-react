@@ -3,3 +3,12 @@ body {
   padding: 30px;
   font-family: "Quicksand";
 }
+
+/* This query was necessary for changing the size of the elements on mobile cellphone*/
+@media only screen and (max-width: 800px) {
+  /*welcome section media query*/
+
+  body {
+    padding: 5px;
+  }
+}

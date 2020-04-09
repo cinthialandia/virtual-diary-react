@@ -1,0 +1,35 @@
+.date-picker-container {
+  display: flex;
+  align-items: center;
+}
+
+.date-picker-container input {
+  text-align: center;
+}
+
+.date-picker-container .btn-flat {
+  color: #fca82e;
+  font-weight: bold;
+}
+
+[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  color: #fca82e;
+  border: 2px solid;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator:hover {
+  background-color: #fca82e;
+  color: white;
+  border: 2px solid #fca82e;
+}

@@ -1,23 +1,4 @@
-/*header style*/
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 30px;
-}
-
-.question {
-  text-align: center;
-  padding: 15px;
-}
-
-/* This query was necessary for changing the size of the elements on mobile cellphone*/
-@media only screen and (max-width: 800px) {
-  /*welcome section media query*/
-
-  .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.card-container {
+  max-width: 900px;
+  margin: 0 auto;
 }

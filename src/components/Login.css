@@ -1,0 +1,17 @@
+section {
+  display: flex;
+}
+
+.container-welcome {
+  display: flex;
+  flex-direction: column;
+}
+
+.loggin {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-container {
+  padding: 20px;
+}
