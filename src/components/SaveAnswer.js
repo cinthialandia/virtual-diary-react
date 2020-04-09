@@ -29,7 +29,7 @@ class SaveAnswer extends React.Component {
 
   render() {
     return (
-      <form class="form-answer" onSubmit={this.handleSubmit}>
+      <form className="form-answer" onSubmit={this.handleSubmit}>
         <span className="year">{this.getYearFromDate()}</span>
         <div className="text-and-button">
           <TextField

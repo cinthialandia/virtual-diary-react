@@ -9,8 +9,17 @@ const firebaseApp = firebase.initializeApp({
 
 const base = Rebase.createClass(firebaseApp.database());
 
+const getCurrentUser = () =>
+  new Promise(function (resolve, reject) {
+    try {
+      firebaseApp.auth().onAuthStateChanged((user) => resolve(user));
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 //this is a named export
-export { firebaseApp };
+export { firebaseApp, getCurrentUser };
 
 //this is a default export
 export default base;

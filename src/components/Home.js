@@ -5,13 +5,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Datepicker from "./Datepicker";
 import SaveAnswer from "./SaveAnswer";
 import Answers from "./Answers";
-import base from "../base";
+import base, { firebaseApp, getCurrentUser } from "../base";
 import "./Home.css";
 
 const FAKE_USER_ID = "asdf123";
 
 class App extends React.Component {
   state = {
+    currentUser: undefined,
     owner: undefined,
     date: undefined,
     answers: {},
@@ -27,6 +28,12 @@ class App extends React.Component {
       date: newDate,
     });
   };
+
+  getUserId = async () => {
+    const currentUser = await getCurrentUser();
+    return currentUser.uid;
+  };
+
   getQuestionId = () => {
     const date = new Date(this.state.date);
     const dateMonth = date.getMonth() + 1;
@@ -43,22 +50,29 @@ class App extends React.Component {
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
   async componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
-    const owner = await base.fetch(`${FAKE_USER_ID}/name`, { context: this });
+    const currentUser = await getCurrentUser();
+    const owner = await base.fetch(`${currentUser.uid}/owner`, {
+      context: this,
+    });
 
     this.setState({
       date: todayDate,
       owner,
+      currentUser,
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     if (this.state.date !== prevState.date) {
       if (this.dbConnection) {
         base.removeBinding(this.dbConnection);
       }
+      const userId = this.state.currentUser.uid;
+      const questionId = this.getQuestionId();
+
       this.dbConnection = base.syncState(
         //le estamos diciendo que se sincronice con esta parte de la base de datos
-        `${FAKE_USER_ID}/answers/${this.getQuestionId()}`,
+        `${userId}/answers/${questionId}`,
         {
           context: this,
           state: "answers",
@@ -80,24 +94,24 @@ class App extends React.Component {
 
     if (!date || !tReady) {
       return (
-        <p className="loading-container">
+        <div className="loading-container">
           <CircularProgress />
-        </p>
+        </div>
       );
     }
 
     return (
       <React.Fragment>
         <header className="header-container">
-          <h3 className="owner-name">{owner}'s Diary</h3>
+          <h3 className="owner-name">{owner.name}'s Diary</h3>
           <Datepicker date={this.state.date} setDate={this.setDate} />
         </header>
         <h1 className="question">{t(this.getQuestionId())}</h1>
         <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
         {loadingAnswers ? (
-          <p className="loading-container">
+          <div className="loading-container">
             <CircularProgress />
-          </p>
+          </div>
         ) : (
           <Answers answersSaved={this.state.answers} />
         )}
