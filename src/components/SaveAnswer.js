@@ -1,7 +1,10 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { styled } from "@material-ui/core/styles";
 import "./SaveAnswer.css";
+
+const SaveButton = styled(Button)({ color: "white" });
 
 class SaveAnswer extends React.Component {
   state = {
@@ -39,14 +42,14 @@ class SaveAnswer extends React.Component {
             onChange={this.handleInput}
             label="Answer"
           />
-          <Button
+          <SaveButton
             className="save-button"
             variant="contained"
             type="submit"
             color="primary"
           >
             Save
-          </Button>
+          </SaveButton>
         </div>
       </form>
     );
