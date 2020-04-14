@@ -39,7 +39,6 @@ class Nav extends React.Component {
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
           <MenuItem onClick={this.props.logout}>Logout</MenuItem>
         </Menu>
       </div>

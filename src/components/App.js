@@ -13,6 +13,11 @@ const theme = createMuiTheme({
       main: "#e678a7",
     },
   },
+  typography: {
+    button: {
+      color: "#fff",
+    },
+  },
 });
 
 class App extends React.Component {

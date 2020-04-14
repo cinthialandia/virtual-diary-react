@@ -56,6 +56,10 @@ class App extends React.Component {
   async componentDidMount() {
     const todayDate = format(new Date(), "yyyy-MM-dd");
     const currentUser = await getCurrentUser();
+    if (!currentUser) {
+      this.props.history.push(`/login/`);
+      return;
+    }
     const owner = await base.fetch(`${currentUser.uid}/owner`, {
       context: this,
     });
@@ -90,6 +94,9 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
+    if (!this.dbConnection) {
+      return;
+    }
     base.removeBinding(this.dbConnection);
   }
 

@@ -1,15 +1,20 @@
-section {
+.login-container {
   display: flex;
 }
 
 .container-welcome {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  padding: 40px;
 }
 
-.loggin {
-  display: flex;
-  flex-direction: column;
+.login {
+  display: block;
+  text-align: center;
+}
+
+.login > * {
+  display: block;
+  margin-bottom: 20px;
 }
 
 .img-container img {
@@ -19,4 +24,24 @@ section {
 
 .img-container {
   padding: 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.alert {
+  margin: 20px 0;
+  max-width: 100;
+}
+.principal-title {
+  text-align: center;
+}
+
+/* This query was necessary for changing the size of the elements on mobile cellphone*/
+@media only screen and (max-width: 800px) {
+  /*welcome section media query*/
+
+  .login-container {
+    display: block;
+  }
 }
