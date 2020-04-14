@@ -61,6 +61,13 @@ section.answers {
   left: -20px;
 }
 
+.no-answer {
+  text-align: center;
+  padding-bottom: 40px;
+  color: #a8a8a8;
+  font-weight: bold;
+}
+
 /* This query was necessary for changing the size of the elements on mobile cellphone*/
 @media only screen and (max-width: 800px) {
   /*welcome section media query*/
