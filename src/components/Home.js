@@ -5,10 +5,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Datepicker from "./Datepicker";
 import SaveAnswer from "./SaveAnswer";
 import Answers from "./Answers";
+import Nav from "./Nav";
 import base, { firebaseApp, getCurrentUser } from "../base";
 import "./Home.css";
-
-const FAKE_USER_ID = "asdf123";
 
 class App extends React.Component {
   state = {
@@ -103,7 +102,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <header className="header-container">
-          <h3 className="owner-name">{owner.name}'s Diary</h3>
+          <Nav owner={owner}></Nav>
           <Datepicker date={this.state.date} setDate={this.setDate} />
         </header>
         <h1 className="question">{t(this.getQuestionId())}</h1>
