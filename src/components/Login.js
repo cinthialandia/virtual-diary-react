@@ -31,10 +31,6 @@ class Login extends React.Component {
     this.authHandler(authData);
   };
 
-  logout = () => {
-    firebase.auth().signOut().then(console.log);
-  };
-
   render() {
     return (
       <section>
@@ -50,7 +46,6 @@ class Login extends React.Component {
               Facebook
             </button>
             <button onClick={() => this.authenticate("Google")}>Google</button>
-            <button onClick={this.logout}>log out</button>
           </div>
         </div>
       </section>

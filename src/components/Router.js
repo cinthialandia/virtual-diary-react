@@ -6,7 +6,13 @@ import Login from "./Login";
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={() => <Home useSuspense={false} />} />
+      <Route
+        exact
+        path="/"
+        component={({ history }) => (
+          <Home useSuspense={false} history={history} />
+        )}
+      />
       <Route path="/login/" component={Login} />
       <Route component={Home} />
     </Switch>

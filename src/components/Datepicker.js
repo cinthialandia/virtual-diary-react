@@ -36,7 +36,7 @@ class Datepicker extends React.Component {
     return (
       //estamos renderizando el daypicker
       <div className="date-picker-container">
-        <Button onClick={this.handleClickPrev}>
+        <Button color="primary" onClick={this.handleClickPrev}>
           <ArrowLeftIcon></ArrowLeftIcon>
         </Button>
         <TextField
@@ -44,7 +44,7 @@ class Datepicker extends React.Component {
           value={this.props.date}
           onChange={this.handleInput}
         />
-        <Button onClick={this.handleClickNext}>
+        <Button color="primary" onClick={this.handleClickNext}>
           <ArrowRightIcon></ArrowRightIcon>
         </Button>
       </div>

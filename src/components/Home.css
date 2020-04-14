@@ -13,6 +13,7 @@
 .question {
   text-align: center;
   word-wrap: break-word;
+  padding: 20px;
 }
 
 /* This query was necessary for changing the size of the elements on mobile cellphone*/
@@ -30,8 +31,6 @@
   }
 
   .question {
-    text-align: center;
-    word-wrap: break-word;
     padding: 20px;
   }
 }

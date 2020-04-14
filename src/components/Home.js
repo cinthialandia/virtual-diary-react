@@ -7,6 +7,7 @@ import SaveAnswer from "./SaveAnswer";
 import Answers from "./Answers";
 import Nav from "./Nav";
 import base, { firebaseApp, getCurrentUser } from "../base";
+import firebase from "firebase";
 import "./Home.css";
 
 class App extends React.Component {
@@ -44,6 +45,11 @@ class App extends React.Component {
     this.setState({
       answers: { ...this.state.answers, [year]: answer },
     });
+  };
+
+  logout = async () => {
+    await firebase.auth().signOut();
+    this.props.history.push(`/login/`);
   };
 
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
@@ -102,7 +108,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <header className="header-container">
-          <Nav owner={owner}></Nav>
+          <Nav owner={owner} logout={this.logout}></Nav>
           <Datepicker date={this.state.date} setDate={this.setDate} />
         </header>
         <h1 className="question">{t(this.getQuestionId())}</h1>
