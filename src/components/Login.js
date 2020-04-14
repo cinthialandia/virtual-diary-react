@@ -4,11 +4,11 @@ import Alert from "@material-ui/lab/Alert";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { styled } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/core/styles";
+import base, { firebaseApp, getCurrentUser } from "../base";
 import "./Login.css";
-import base, { firebaseApp } from "../base";
 
 const BaseButton = styled(Button)({
   color: "#fff",
@@ -45,12 +45,30 @@ const GoogleIcon = (props) => (
 );
 
 class Login extends React.Component {
-  state = { error: null };
+  state = { error: null, loading: true };
 
-  authHandler = async (authData) => {
-    const {
-      user: { uid, photoURL, displayName },
-    } = authData;
+  componentDidMount = async () => {
+    try {
+      const { user } = await firebase.auth().getRedirectResult();
+      if (user) {
+        this.authHandler(user);
+        return;
+      }
+
+      const loggedUser = await getCurrentUser();
+      if (loggedUser) {
+        this.props.history.push(`/`);
+        return;
+      }
+
+      this.setState({ loading: false });
+    } catch (error) {
+      this.setState({ error, loading: false });
+    }
+  };
+
+  authHandler = async (user) => {
+    const { uid, photoURL, displayName } = user;
     const diaryOwner = await base.fetch(`${uid}/owner`, {
       context: this,
       asArray: true,
@@ -70,15 +88,23 @@ class Login extends React.Component {
       await firebase
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
-      const authData = await firebaseApp.auth().signInWithPopup(authProvider);
-
-      this.authHandler(authData);
+      await firebaseApp.auth().signInWithRedirect(authProvider);
     } catch (error) {
-      this.setState({ error: error });
+      this.setState({ error, loading: false });
     }
   };
 
   render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <CircularProgress />
+        </div>
+      );
+    }
+
     return (
       <section className="login-container">
         <div className="img-container">

@@ -10,7 +10,7 @@ class Answers extends React.Component {
 
     return (
       <section className="answers">
-        <h2 class="answers-title">Previous answers</h2>
+        <h2 className="answers-title">Previous answers</h2>
         <ul className="answers-container">
           {/* descontruimos para obtener key and value del array. */}
           {answersSaved.map(([year, answer]) => {

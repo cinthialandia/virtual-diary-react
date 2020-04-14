@@ -3,14 +3,9 @@
   align-items: center;
 }
 
-.date-picker-container input {
+[type="date"] {
   text-align: center;
 }
-
-/* .date-picker-container .btn-flat {
-  color: #fca82e;
-  font-weight: bold;
-} */
 
 [type="date"]::-webkit-clear-button {
   display: none;
