@@ -69,13 +69,13 @@ class Login extends React.Component {
 
   authHandler = async (user) => {
     const { uid, photoURL, displayName } = user;
-    const diaryOwner = await base.fetch(`${uid}/owner`, {
+    const diaryOwner = await base.fetch(`diaries/${uid}/owner`, {
       context: this,
       asArray: true,
     });
 
     if (!diaryOwner.length) {
-      await base.post(`${uid}`, {
+      await base.post(`diaries/${uid}`, {
         data: { owner: { name: displayName, photoURL } },
       });
     }

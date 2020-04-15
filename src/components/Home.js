@@ -56,7 +56,7 @@ class App extends React.Component {
         this.props.history.push(`/login/`);
         return;
       }
-      const owner = await base.fetch(`${currentUser.uid}/owner`, {
+      const owner = await base.fetch(`diaries/${currentUser.uid}/owner`, {
         context: this,
       });
 
@@ -80,7 +80,7 @@ class App extends React.Component {
 
       this.dbConnection = base.syncState(
         //le estamos diciendo que se sincronice con esta parte de la base de datos
-        `${userId}/answers/${questionId}`,
+        `diaries/${userId}/answers/${questionId}`,
         {
           context: this,
           state: "answers",
