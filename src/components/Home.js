@@ -16,7 +16,7 @@ class App extends React.Component {
     owner: undefined,
     date: undefined,
     answers: {},
-    loadingAnswers: false,
+    loadingAnswers: true,
   };
 
   //funcion que recibe un objecto fecha del componente daypicker y este le da el formato requerido para que se vea en le daypicker
@@ -102,7 +102,7 @@ class App extends React.Component {
 
   render() {
     const { t, tReady } = this.props;
-    const { date, owner, loadingAnswers } = this.state;
+    const { date, owner, loadingAnswers, answers } = this.state;
 
     if (!date || !tReady) {
       return (
@@ -116,16 +116,16 @@ class App extends React.Component {
       <React.Fragment>
         <header className="header-container">
           <Nav owner={owner} logout={this.logout}></Nav>
-          <Datepicker date={this.state.date} setDate={this.setDate} />
+          <Datepicker date={date} setDate={this.setDate} />
         </header>
         <h1 className="question">{t(this.getQuestionId())}</h1>
-        <SaveAnswer date={this.state.date} saveAnswer={this.setAnswer} />
+        <SaveAnswer date={date} saveAnswer={this.setAnswer} />
         {loadingAnswers ? (
           <div className="loading-container">
             <CircularProgress />
           </div>
         ) : (
-          <Answers answersSaved={this.state.answers} />
+          <Answers answersSaved={answers} />
         )}
       </React.Fragment>
     );

@@ -1,9 +1,8 @@
 import React from "react";
+import { addDays, subDays } from "date-fns"; //libreria que resta los dias en el daypicker
 import Button from "@material-ui/core/Button"; //liberia que tiene estilo para botones
 import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import { subDays } from "date-fns"; //libreria que resta los dias en el daypicker
-import { addDays } from "date-fns"; //libreria que suma los dias en el dayicker
 import TextField from "@material-ui/core/TextField";
 import "./Datepicker.css";
 
@@ -33,8 +32,8 @@ class Datepicker extends React.Component {
   };
 
   render() {
+    // estamos renderizando el daypicker
     return (
-      //estamos renderizando el daypicker
       <div className="date-picker-container">
         <Button color="primary" onClick={this.handleClickPrev}>
           <ArrowLeftIcon></ArrowLeftIcon>
