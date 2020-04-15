@@ -29,11 +29,6 @@ class App extends React.Component {
     });
   };
 
-  getUserId = async () => {
-    const currentUser = await getCurrentUser();
-    return currentUser.uid;
-  };
-
   getQuestionId = () => {
     const date = new Date(this.state.date);
     const dateMonth = date.getMonth() + 1;
@@ -54,21 +49,25 @@ class App extends React.Component {
 
   //se esta inicializando la aplicacion con la fecha de hoy siempre.
   async componentDidMount() {
-    const todayDate = format(new Date(), "yyyy-MM-dd");
-    const currentUser = await getCurrentUser();
-    if (!currentUser) {
-      this.props.history.push(`/login/`);
-      return;
-    }
-    const owner = await base.fetch(`${currentUser.uid}/owner`, {
-      context: this,
-    });
+    try {
+      const todayDate = format(new Date(), "yyyy-MM-dd");
+      const currentUser = await getCurrentUser();
+      if (!currentUser) {
+        this.props.history.push(`/login/`);
+        return;
+      }
+      const owner = await base.fetch(`${currentUser.uid}/owner`, {
+        context: this,
+      });
 
-    this.setState({
-      date: todayDate,
-      owner,
-      currentUser,
-    });
+      this.setState({
+        date: todayDate,
+        owner,
+        currentUser,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -86,6 +85,7 @@ class App extends React.Component {
           context: this,
           state: "answers",
           then: () => this.setState({ loadingAnswers: false }),
+          onFailure: (error) => console.error(error),
         }
       );
 
